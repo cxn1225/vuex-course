@@ -3,8 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+/* 在任何组件都可以使用store的数据 */
 export default new Vuex.Store({
   state: {
+    /* 属性 */
+    count: 0,
+    todos: [
+      { id: 1, title: "todo item 1", completed: false },
+      { id: 2, title: "todo item 2", completed: false },
+      { id: 3, title: "todo item 3", completed: false },
+    ]
+  },
+  getters: {
 
   },
   mutations: {

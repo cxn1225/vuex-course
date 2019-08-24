@@ -1,28 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    app.vue:{{count}}
+    <p>{{todos}}</p>
+    <Count />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  import { mapState } from "vuex"
+  import Count from "./components/Count.vue"
+  export default {
+    name: 'app',
+    components: {
+      Count
+    },
+    /* 写法一 */
+    /*  computed: {
+       count() {
+         return this.$store.state.count
+       },
+       todos() {
+         return this.$store.state.todos
+       }
+     }, */
+    /* 写法二 */
+    /* computed: mapState({
+      count: state => state.count,
+      todos: state => state.todos
+    }), */
+    /* 写法三 */
+    computed: mapState(["count", "todos"])
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
