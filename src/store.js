@@ -14,14 +14,17 @@ export default new Vuex.Store({
       { id: 3, title: "todo item 3", completed: true },
     ]
   },
+  /* 修饰属性 */
   getters: {
-    getCount: state => ++state.count,
+    getCount: state => state.count,
     completedTodos: state => state.todos.filter(todo => todo.completed),
     completedTodosCounts: (state, getters) => getters.completedTodos.length,
     getTodoById: state => id => state.todos.find(todo => todo.id == id)
   },
+  /* 更改属性 */
   mutations: {
-
+    incrementCount: state => state.count++,
+    decrementCount: (state, num) => state.count -= num
   },
   actions: {
 

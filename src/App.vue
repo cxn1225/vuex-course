@@ -1,56 +1,42 @@
 <template>
   <div id="app">
-    app.vue:{{count}}
+    app.vue:{{getCount}}
     <p>{{todos}}</p>
     <p>{{completedTodos}}</p>
     <p>{{completedTodosCounts}}</p>
     <p>{{getTodoById(2)}}</p>
+    <button @click="decrementCount(5)">减</button>
+    {{getCount}}
+    <button @click="incrementCount">加</button>
   </div>
 </template>
 
 <script>
-  import { mapState, mapGetters } from "vuex"
+  import { mapState, mapGetters, mapMutations } from "vuex"
   import Count from "./components/Count.vue"
   export default {
     name: 'app',
-    components: {
-      Count
-    },
-    /* 简写 */
+
+    /* 简写：调用vuex的getters */
     computed: mapGetters([
-      "count",
+      "getCount",
       "completedTodos",
       "completedTodosCounts",
       "getTodoById"
     ]),
-    /* 写法一 */
-    /* computed: {
-      count() {
-        return this.$store.getters.getCount
+
+    /* methods: {
+      incrementCount() {    //加
+        //调用vuex的mutations
+        this.$store.commit("incrementCount")
       },
-      todos() {
-        return this.$store.state.todos
-      },
-      completedTodos() {
-        return this.$store.getters.completedTodos
-      },
-      completedTodosCounts() {
-        return this.$store.getters.completedTodosCounts
-      },
-      getTodoById() {
-        return this.$store.getters.getTodoById
+      decrementCount(num) {     //减（传参）
+        this.$store.commit("decrementCount", num)
       }
     }, */
-    methods: {
 
-    },
-    /* 写法二 */
-    /* computed: mapState({
-      count: state => state.count,
-      todos: state => state.todos
-    }), */
-    /* 写法三 */
-    /*  computed: mapState(["count", "todos"]) */
+    /* 简写 */
+    methods: mapMutations(["incrementCount", "decrementCount"])
   }
 </script>
 
